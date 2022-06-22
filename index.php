@@ -1,19 +1,9 @@
 <?php
-define('DB_SERVERNAME', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
-define('DB_NAME', 'db_university');
-define('DB_PORT', 8889);
-
-$conn = new mysqli(DB_SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
-
-if ($conn && $conn->connect_error) {
-  echo "DB connection error", $conn->connect_error;
-  die();
-}
+require_once __DIR__ . "/department.php";
+require_once __DIR__ . "/Database.php";
 
 //Query per il database
-$sql = "SELECT * FROM `departments`;";
+$sql = "SELECT `id`, `name` FROM `departments`;";
 $result = $conn->query($sql);
 
 
@@ -23,7 +13,8 @@ $departments = [];
 if ($result && $result->num_rows > 0) {
   // ci ono dei risultati nella query
   while ($row = $result->fetch_assoc()) {
-    $departments[] = $row;
+    $curr_department = new department($row['id'], $row['name']);
+    $departments[] = $curr_department;
   }
 } elseif ($result) {
   // Query funziona ma senza risultati
@@ -47,8 +38,8 @@ if ($result && $result->num_rows > 0) {
   <h1>Lista dipartimenti</h1>
   <?php foreach ($departments as $department) { ?>
     <div>
-      <h3><?php echo $department["name"] ?></h3>
-      <a href="">Maggiori informazioni</a>
+      <h3><?php echo $department->name; ?></h3>
+      <a href="single-department-details.php">Maggiori informazioni</a>
     </div>
   <?php } ?>
 </body>

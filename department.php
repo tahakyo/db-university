@@ -12,5 +12,12 @@ class department {
     $this->id = $_id;
     $this->name = $_name;
   }
+
+  function getContactData($_adress, $_phone, $_email, $_website) {
+    $this->adress = $_adress;
+    $this->phone = $_phone;
+    $this->email = $_email;
+    $this->website = $_website;
+  }
 }
 ?>
