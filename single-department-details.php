@@ -1,10 +1,19 @@
 <?php
     require_once __DIR__ . "/Database.php";
     require_once __DIR__ . "/department.php";
-    
+    //problema di sql injection
+    // $id = $_GET["id"];
+    // $sql = "SELECT * FROM `departments` WHERE `id` = $id;";
+    // $result = $conn->query($sql);
+
+    //Preparazione dello statement
+    $stmt = $conn->prepare("SELECT * FROM `departments` WHERE `id` = ?");
+    $stmt->bind_param("d", $id);
     $id = $_GET["id"];
-    $sql = "SELECT * FROM `departments` WHERE `id` = $id;";
-    $result = $conn->query($sql);
+
+    //Esecuzione della query
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $departments = [];
     //controllo della query
