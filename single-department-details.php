@@ -39,6 +39,7 @@
   <title>Department-info</title>
 </head>
 <body>
+  <a href="index.php">Lista dei dipartimenti</a>
   <?php foreach ($departments as $department) { ?>
     <h1><?php echo $department->name; ?></h1>
     <p>--<?php echo $department->head_of_department; ?>--</p>
