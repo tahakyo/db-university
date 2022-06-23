@@ -2,7 +2,7 @@
 class department {
   public $id;
   public $name;
-  public $adress;
+  public $address;
   public $phone;
   public $email;
   public $website;
@@ -13,11 +13,20 @@ class department {
     $this->name = $_name;
   }
 
-  function getContactData($_adress, $_phone, $_email, $_website) {
-    $this->adress = $_adress;
+  public function getContactData($_address, $_phone, $_email, $_website) {
+    $this->address = $_address;
     $this->phone = $_phone;
     $this->email = $_email;
     $this->website = $_website;
+  }
+
+  public function printContactData() {
+    return [
+      "Adress" => $this->address,
+      "Phone"  => $this->phone,
+      "Email" => $this->email,
+      "Website" => $this->website,
+    ];
   }
 }
 ?>

@@ -39,7 +39,7 @@ if ($result && $result->num_rows > 0) {
   <?php foreach ($departments as $department) { ?>
     <div>
       <h3><?php echo $department->name; ?></h3>
-      <a href="single-department-details.php">Maggiori informazioni</a>
+      <a href="single-department-details.php?id=<?php echo $department->id ; ?>">Maggiori informazioni</a>
     </div>
   <?php } ?>
 </body>

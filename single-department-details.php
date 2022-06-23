@@ -11,11 +11,10 @@
     if ($result && $result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
         $curr_department = new department($row['id'], $row['name']);
-        $curr_department->getContactData($row['adress'], $row['phone'], $row['email'], $row['website']);
+        $curr_department->getContactData($row['address'], $row['phone'], $row['email'], $row['website']);
         $curr_department->head_of_department = $row['head_of_department'];
         $departments[] = $curr_department;
       }
-      var_dump($departments);
     }elseif ($result) {
       echo "Non ci sono risultati";
     }else {
@@ -31,6 +30,16 @@
   <title>Department-info</title>
 </head>
 <body>
-  
+  <?php foreach ($departments as $department) { ?>
+    <h1><?php echo $department->name; ?></h1>
+    <p>--<?php echo $department->head_of_department; ?>--</p>
+
+    <h3>Contatti</h3>
+    <ul>
+      <?php foreach($department->printContactData() as $key => $value) {?>
+      <li><?php echo "$key : $value" ?></li>
+      <?php } ?>
+    </ul>
+  <?php } ?>
 </body>
 </html>
